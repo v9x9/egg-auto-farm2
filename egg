@@ -11,12 +11,17 @@ local TARGET_PETS = {
     ["Dragonfly"] = true,
 }
 
+-- Mets bien ici ta raw Github URL qui contient ce script complet
+local SCRIPT_URL = "https://raw.githubusercontent.com/v9x9/egg-auto-farm2/refs/heads/main/egg"
+
+-- Queue le script AVANT le téléport
 if queue_on_teleport then
     queue_on_teleport([[
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/v9x9/egg-auto-farm/refs/heads/main/egg2"))()
+        loadstring(game:HttpGet("]] .. SCRIPT_URL .. [["))()
     ]])
 end
 
+-- Attente du loading screen
 while playerGui:FindFirstChild("LoadingScreen") do
     task.wait(1)
 end
@@ -102,5 +107,6 @@ task.spawn(function()
         end
     end
 
+    -- téléport vers le même serveur AVEC player en argument pour la relance correcte
     teleportService:TeleportToPlaceInstance(PLACE_ID, game.JobId, localPlayer)
 end)
